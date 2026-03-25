@@ -8,9 +8,7 @@
 
 ## Overview
 
-MAXIMA is a high-energy X-ray instrument operating at **24 keV** with a focused beam capable of
-penetrating bulk structural metals. All personnel must understand and follow the safety procedures
-below before working in AIMD-L. This document does not replace in-person safety training.
+MAXIMA is a high-energy X-ray instrument operating at **24 keV**(In Kalpha peak) with a focused beam capable of penetrating bulk structural metals. All personnel must understand and follow the safety procedures below before working in AIMD-L. This document does not replace in-person safety training.
 
 ---
 
@@ -21,14 +19,10 @@ The following requirements apply to all personnel at all times in AIMD-L:
 - **Buddy system:** Never operate MAXIMA alone. A second person must be present during all X-ray
   operations.
 - **PPE:** Lab coat and safety goggles must be worn whenever you are in the lab.
-- **Dosimeter:** Must be worn and active during all X-ray operations. Check it out and in according
-  to lab protocol.
+- **Dosimeter:** Based on X-ray safety protocols, on-person dosimeters are not required after a certain period of time in which dosimeters have not shown high doses. Rather, we have several dosimeters placed around MAXIMA, while Proto comes in for leak checks once a year. 
 - **Warning lights:** Always confirm the correct light state (see [Indication System](#indication-system))
   before starting or stopping any procedure.
-- **Closing the lab:** If you are the last group to leave for the day, turn off all warning indicator
-  lights (laser, X-ray, and conveyance systems) using the switch near the lab door, and turn off all
-  office lights.
-
+- **Closing the lab:** If you are the last group to leave for the day, turn off all warning indicators lights (laser, X-ray, and conveyance systems) using the switch near the lab door, and turn off all office lights. Laboratory level indicator lights are switched off at the entrance of AIMD-L, while office lights can be turned off from the control room. 
 ---
 
 ## Indication System
@@ -38,32 +32,26 @@ Always check the light state before any procedure.
 
 | Light | Status | Meaning |
 |-------|--------|---------|
-| 🔴 Red | On | X-rays are active |
-| 🟡 Yellow | On | System in transition / warning state |
-| ⚪ White | On | *TODO: document meaning* |
+| 🔴 Red | On | Shutter is open |
+| 🟡 Yellow | On | X-rays are on |
+| ⚪ White | On | Interlock Fault|
 | 🟢 Green | On | System safe / standby |
-
-> **TODO:** Confirm and complete the meaning of each light state with Proto or Matt Shaeffer.
-
 ---
 
 ## Interlock System
 
-The interlock system is the primary hardware safety barrier preventing X-ray radiation from reaching
-personnel outside the enclosure.
+The interlock system is the primary hardware safety barrier preventing X-ray radiation from reaching personnel outside the enclosure.
 
 **How it works:** The system enforces a fail-safe condition such that the X-ray shutter and the
 auto-door lock cannot both be open simultaneously. The shutter — not the door — is what contains
 X-ray exposure.
 
 **Critical implication:** The X-ray beam can be active while the auto-door is open. Although the
-shutter should contain all exposure, this is an unsafe and uncomfortable condition. **Lab operating
+shutter should contain all exposure, this is an unsafe and uncomfortable condition, especially for other researchers in the laboratory. **Lab operating
 procedure requires the auto-door to be closed during all experimental operations**, regardless of
 shutter state.
 
-**E-stop:** An emergency stop is available. Note that the E-stop may have a bi-stable latch behavior
-(hardware or software — currently unclear). If the interlock does not reset after an E-stop, contact
-Proto for remote assistance. Do not attempt to override the interlock manually.
+**E-stop:** An emergency stop is available. Note that the E-stop may have a bi-stable latch behavior (hardware or software — currently unclear). If the interlock does not reset after an E-stop, contact Proto for remote assistance. Do not attempt to override the interlock manually. It should also be mentioned that the UR3e has some safety switches that are activated if the detector is accidentally touched. Resetting this takes an extended amount of time (requires sending a command from the control computer). 
 
 ---
 
