@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../startup/">
+        <link rel="prev" href="../manual_startup/">
       
       
         <link rel="next" href="../sample_handling/">
@@ -267,7 +267,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../startup/" class="md-tabs__link">
+        <a href="../manual_startup/" class="md-tabs__link">
           
   
   
@@ -503,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../startup/" class="md-nav__link">
+      <a href="../manual_startup/" class="md-nav__link">
         
   
   
@@ -595,6 +595,17 @@
     <span class="md-ellipsis">
       
         Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#both-are-required-when-starting-fresh-for-the-day-x-ray-calibration-is-forced-at-the-start-of-each-day-while-sample-calibration-is-currently-march-25-2026-manually-controlled-there-is-no-system-stopping-you-from-running-experiments-without-calibration-however-sample-calibration-is-from-this-date-forward-march-25-2026-required-whenever-it-has-been-24-hours-since-the-last-calibration-and-also-when-the-sample-holder-or-detector-are-repositioned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Both are required when starting fresh for the day. X-ray calibration is forced at the start of each day, while sample calibration is currently (March 25, 2026) manually controlled. There is no system stopping you from running experiments without calibration. However, sample calibration is, from this date forward (March 25, 2026) required whenever it has been 24 hours since the last calibration, and also when the sample holder or detector are repositioned.
       
     </span>
   </a>
@@ -1309,18 +1320,16 @@
 <p><strong>Relevant to:</strong> All operators running experiments on MAXIMA<br />
 <strong>Last Updated:</strong> March 2025<br />
 <strong>Author:</strong> Harrison Park<br />
-<strong>Prerequisites:</strong> <a href="../startup/">Startup Procedure</a> must be completed before calibration.</p>
+<strong>Prerequisites:</strong> <a href="startup.md">Startup Procedure</a> must be completed before calibration.</p>
 <hr />
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>MAXIMA requires two distinct types of calibration before data collection:</p>
 <ol>
-<li><strong>Machine calibration</strong> — aligns and stabilizes the X-ray source (MetalJet)</li>
+<li><strong>X-ray calibration</strong> — aligns and stabilizes the X-ray source (MetalJet). Happens every 24 hours or if X-ray source settings (current, voltage) are changed.</li>
 <li><strong>Sample calibration</strong> — establishes the sample-to-detector geometry using known calibrant
-   materials placed on the sample holder</li>
+   materials placed on the sample holder. At this point in time is done through PyFAI GUI. Gannon Murray's current (March 25, 2026) work is on establishing MAXIMA-ViT, an automated sample-to-detector distance calibration.</li>
 </ol>
-<p>Both are required when starting fresh for the day. Sample calibration is also required whenever
-the detector distance is changed or the sample holder is repositioned.</p>
-<hr />
+<h2 id="both-are-required-when-starting-fresh-for-the-day-x-ray-calibration-is-forced-at-the-start-of-each-day-while-sample-calibration-is-currently-march-25-2026-manually-controlled-there-is-no-system-stopping-you-from-running-experiments-without-calibration-however-sample-calibration-is-from-this-date-forward-march-25-2026-required-whenever-it-has-been-24-hours-since-the-last-calibration-and-also-when-the-sample-holder-or-detector-are-repositioned">Both are required when starting fresh for the day. X-ray calibration is forced at the start of each day, while sample calibration is currently (March 25, 2026) manually controlled. There is no system stopping you from running experiments without calibration. However, sample calibration is, from this date forward (March 25, 2026) required whenever it has been 24 hours since the last calibration, and also when the sample holder or detector are repositioned.<a class="headerlink" href="#both-are-required-when-starting-fresh-for-the-day-x-ray-calibration-is-forced-at-the-start-of-each-day-while-sample-calibration-is-currently-march-25-2026-manually-controlled-there-is-no-system-stopping-you-from-running-experiments-without-calibration-however-sample-calibration-is-from-this-date-forward-march-25-2026-required-whenever-it-has-been-24-hours-since-the-last-calibration-and-also-when-the-sample-holder-or-detector-are-repositioned" title="Permanent link">&para;</a></h2>
 <h2 id="machine-calibration">Machine Calibration<a class="headerlink" href="#machine-calibration" title="Permanent link">&para;</a></h2>
 <h3 id="when-to-perform">When to Perform<a class="headerlink" href="#when-to-perform" title="Permanent link">&para;</a></h3>
 <p>Machine calibration of the <strong>Excillum MetalJet E1+</strong> source is required:</p>
@@ -1332,26 +1341,25 @@ the detector distance is changed or the sample holder is repositioned.</p>
 <p>Machine calibration is performed through the <strong>Excillum software</strong>, not through the AIMDRC
 controller. The source self-calibrates once triggered.</p>
 <ol>
-<li>Open the <strong>Excillum</strong> software on the control PC.</li>
-<li>Initiate the calibration sequence (see Excillum software documentation for the exact menu path).</li>
-<li>Monitor progress in the Excillum interface. Calibration typically completes in <strong>1–5 minutes</strong>.</li>
+<li>Open the <strong>X-Collect</strong> software on the control PC.</li>
+<li>Initiate calibration by turning on the X-ray. X-ray status should switch to "CALIBRATE."</li>
+<li>Calibration typically completes in <strong>5 minutes</strong>.</li>
 <li>Do not operate the X-ray shutter or begin experiments until calibration is confirmed complete.</li>
 </ol>
-<blockquote>
-<p><strong>TODO:</strong> Add screenshot of Excillum calibration screen and exact menu navigation steps.</p>
-</blockquote>
 <hr />
 <h2 id="sample-detector-geometry-calibration">Sample (Detector Geometry) Calibration<a class="headerlink" href="#sample-detector-geometry-calibration" title="Permanent link">&para;</a></h2>
 <h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h3>
 <p>Sample calibration uses alumina powder calibrants to determine the beam center position on the
 detector and the accurate sample-to-detector distance. This information is used by PyFAI during
 azimuthal integration to convert 2D diffraction patterns into 1D intensity profiles. Without
-accurate calibration, all downstream <code>q</code> or <code>2θ</code> values will be incorrect.</p>
+accurate calibration, all downstream <code>q</code> or <code>2θ</code> values will be incorrect, not to mention peaks might be wider or altogether non-existent.</p>
 <p>The calibration workflow in the automated data pipeline performs:
 - Correction for detector tilt
 - Beam center location
 - Sample-to-detector distance calibration</p>
 <h3 id="calibrant-materials-and-positions">Calibrant Materials and Positions<a class="headerlink" href="#calibrant-materials-and-positions" title="Permanent link">&para;</a></h3>
+<p><strong>Old system</strong>
+The following is a description of the older system used for calibration. </p>
 <p>Alumina (Al₂O₃) calibrant pucks are placed at four cardinal positions on the sample holder.
 Their coordinates in the instrument coordinate system are:</p>
 <table>
@@ -1385,17 +1393,15 @@ Their coordinates in the instrument coordinate system are:</p>
 Joseph's office). See <a href="../sample_handling/">Sample Handling</a> for the full coordinate system
 description.</p>
 </blockquote>
+<p>This system was dropped due to the difficulty of producing sample holders and calibrants that would reliably show alumina rings. The North-South-West-East system was originally developed to interpolate sample-to-detector distance at any point in the sample. This ended up being difficult due to the lack of sample flatness in most samples, as well as the difficulty in linearly interpolating poni1 and poni2 values, which describe detector tilt away from perpendicular to the X-ray beam. Any results from this era are calibrated using just the North calibrant ([6,31]). </p>
+<p><strong>Current System</strong>
+Currently, we use a single scan of Alumina per dataset. This is due to limitations in our automation, both robotic and computational. However, we are currently (March 25, 2026) in the process of developing new procedures. This is a work in progress. </p>
 <h3 id="procedure_1">Procedure<a class="headerlink" href="#procedure_1" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Confirm calibrant pucks are seated correctly at all four cardinal positions on the sample holder.</li>
-<li>Run calibration scans on all four calibrant positions using the controller API.</li>
-<li>The automated Dagster pipeline will pick up the resulting <code>.h5</code> files and run the PyFAI
-   calibration workflow automatically. See <a href="../software/dagster/">Dagster</a> for details.</li>
-<li>Verify the output calibration parameters (beam center, detector distance, tilt) are
-   reasonable before proceeding to sample data collection.</li>
-</ol>
+<p>PYFAI Explanation: 
+See: Software page. 
+T</p>
 <blockquote>
-<p><strong>TODO:</strong> Add example calibration script and expected output parameter ranges.</p>
+<p><strong>TODO:</strong> Add expected output parameter ranges, citation of Gannon's MAXIMA-ViT work.</p>
 </blockquote>
 <h3 id="manual-calibration-with-pyfai">Manual Calibration with PyFAI<a class="headerlink" href="#manual-calibration-with-pyfai" title="Permanent link">&para;</a></h3>
 <p>If the automated pipeline is unavailable, calibration can be performed manually using PyFAI's
@@ -1455,7 +1461,7 @@ description.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 25, 2026 19:25:44 UTC">March 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 25, 2026 19:57:59 UTC">March 25, 2026</span>
   </span>
 
     

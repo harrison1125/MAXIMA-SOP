@@ -16,7 +16,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../startup/">
+        <link rel="next" href="../manual_startup/">
       
       
         
@@ -267,7 +267,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../startup/" class="md-tabs__link">
+        <a href="../manual_startup/" class="md-tabs__link">
           
   
   
@@ -624,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../startup/" class="md-nav__link">
+      <a href="../manual_startup/" class="md-nav__link">
         
   
   
@@ -1252,9 +1252,7 @@
 <strong>Author:</strong> Harrison Park</p>
 <hr />
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>MAXIMA is a high-energy X-ray instrument operating at <strong>24 keV</strong> with a focused beam capable of
-penetrating bulk structural metals. All personnel must understand and follow the safety procedures
-below before working in AIMD-L. This document does not replace in-person safety training.</p>
+<p>MAXIMA is a high-energy X-ray instrument operating at <strong>24 keV</strong>(In Kalpha peak) with a focused beam capable of penetrating bulk structural metals. All personnel must understand and follow the safety procedures below before working in AIMD-L. This document does not replace in-person safety training.</p>
 <hr />
 <h2 id="general-lab-safety">General Lab Safety<a class="headerlink" href="#general-lab-safety" title="Permanent link">&para;</a></h2>
 <p>The following requirements apply to all personnel at all times in AIMD-L:</p>
@@ -1262,13 +1260,10 @@ below before working in AIMD-L. This document does not replace in-person safety 
 <li><strong>Buddy system:</strong> Never operate MAXIMA alone. A second person must be present during all X-ray
   operations.</li>
 <li><strong>PPE:</strong> Lab coat and safety goggles must be worn whenever you are in the lab.</li>
-<li><strong>Dosimeter:</strong> Must be worn and active during all X-ray operations. Check it out and in according
-  to lab protocol.</li>
+<li><strong>Dosimeter:</strong> Based on X-ray safety protocols, on-person dosimeters are not required after a certain period of time in which dosimeters have not shown high doses. Rather, we have several dosimeters placed around MAXIMA, while Proto comes in for leak checks once a year. </li>
 <li><strong>Warning lights:</strong> Always confirm the correct light state (see <a href="#indication-system">Indication System</a>)
   before starting or stopping any procedure.</li>
-<li><strong>Closing the lab:</strong> If you are the last group to leave for the day, turn off all warning indicator
-  lights (laser, X-ray, and conveyance systems) using the switch near the lab door, and turn off all
-  office lights.</li>
+<li><strong>Closing the lab:</strong> If you are the last group to leave for the day, turn off all warning indicators lights (laser, X-ray, and conveyance systems) using the switch near the lab door, and turn off all office lights. Laboratory level indicator lights are switched off at the entrance of AIMD-L, while office lights can be turned off from the control room. </li>
 </ul>
 <hr />
 <h2 id="indication-system">Indication System<a class="headerlink" href="#indication-system" title="Permanent link">&para;</a></h2>
@@ -1286,42 +1281,40 @@ Always check the light state before any procedure.</p>
 <tr>
 <td>🔴 Red</td>
 <td>On</td>
-<td>X-rays are active</td>
+<td>Shutter is open</td>
 </tr>
 <tr>
 <td>🟡 Yellow</td>
 <td>On</td>
-<td>System in transition / warning state</td>
+<td>X-rays are on</td>
 </tr>
 <tr>
 <td>⚪ White</td>
 <td>On</td>
-<td><em>TODO: document meaning</em></td>
+<td>Interlock Fault</td>
 </tr>
 <tr>
 <td>🟢 Green</td>
 <td>On</td>
 <td>System safe / standby</td>
 </tr>
+<tr>
+<td>---</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>TODO:</strong> Confirm and complete the meaning of each light state with Proto or Matt Shaeffer.</p>
-</blockquote>
-<hr />
 <h2 id="interlock-system">Interlock System<a class="headerlink" href="#interlock-system" title="Permanent link">&para;</a></h2>
-<p>The interlock system is the primary hardware safety barrier preventing X-ray radiation from reaching
-personnel outside the enclosure.</p>
+<p>The interlock system is the primary hardware safety barrier preventing X-ray radiation from reaching personnel outside the enclosure.</p>
 <p><strong>How it works:</strong> The system enforces a fail-safe condition such that the X-ray shutter and the
 auto-door lock cannot both be open simultaneously. The shutter — not the door — is what contains
 X-ray exposure.</p>
 <p><strong>Critical implication:</strong> The X-ray beam can be active while the auto-door is open. Although the
-shutter should contain all exposure, this is an unsafe and uncomfortable condition. <strong>Lab operating
+shutter should contain all exposure, this is an unsafe and uncomfortable condition, especially for other researchers in the laboratory. <strong>Lab operating
 procedure requires the auto-door to be closed during all experimental operations</strong>, regardless of
 shutter state.</p>
-<p><strong>E-stop:</strong> An emergency stop is available. Note that the E-stop may have a bi-stable latch behavior
-(hardware or software — currently unclear). If the interlock does not reset after an E-stop, contact
-Proto for remote assistance. Do not attempt to override the interlock manually.</p>
+<p><strong>E-stop:</strong> An emergency stop is available. Note that the E-stop may have a bi-stable latch behavior (hardware or software — currently unclear). If the interlock does not reset after an E-stop, contact Proto for remote assistance. Do not attempt to override the interlock manually. It should also be mentioned that the UR3e has some safety switches that are activated if the detector is accidentally touched. Resetting this takes an extended amount of time (requires sending a command from the control computer). </p>
 <hr />
 <h2 id="radiation-safety">Radiation Safety<a class="headerlink" href="#radiation-safety" title="Permanent link">&para;</a></h2>
 <p>MAXIMA uses a focused, high-brightness liquid-metal-anode X-ray source (Excillum MetalJet E1+)
@@ -1462,7 +1455,7 @@ issues during off-hours, Proto support is the first point of escalation.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 25, 2026 19:25:44 UTC">March 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 25, 2026 19:40:37 UTC">March 25, 2026</span>
   </span>
 
     
