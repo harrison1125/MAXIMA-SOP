@@ -11,13 +11,11 @@
 
 MAXIMA requires two distinct types of calibration before data collection:
 
-1. **Machine calibration** — aligns and stabilizes the X-ray source (MetalJet)
+1. **X-ray calibration** — aligns and stabilizes the X-ray source (MetalJet). Happens every 24 hours or if X-ray source settings (current, voltage) are changed.
 2. **Sample calibration** — establishes the sample-to-detector geometry using known calibrant
-   materials placed on the sample holder
+   materials placed on the sample holder. At this point in time is done through PyFAI GUI. Gannon Murray's current (March 25, 2026) work is on establishing MAXIMA-ViT, an automated sample-to-detector distance calibration.
 
-Both are required when starting fresh for the day. Sample calibration is also required whenever
-the detector distance is changed or the sample holder is repositioned.
-
+Both are required when starting fresh for the day. X-ray calibration is forced at the start of each day, while sample calibration is currently (March 25, 2026) manually controlled. There is no system stopping you from running experiments without calibration. However, sample calibration is, from this date forward (March 25, 2026) required whenever it has been 24 hours since the last calibration, and also when the sample holder or detector are repositioned. 
 ---
 
 ## Machine Calibration
@@ -34,12 +32,10 @@ Machine calibration of the **Excillum MetalJet E1+** source is required:
 Machine calibration is performed through the **Excillum software**, not through the AIMDRC
 controller. The source self-calibrates once triggered.
 
-1. Open the **Excillum** software on the control PC.
-2. Initiate the calibration sequence (see Excillum software documentation for the exact menu path).
-3. Monitor progress in the Excillum interface. Calibration typically completes in **1–5 minutes**.
+1. Open the **X-Collect** software on the control PC.
+2. Initiate calibration by turning on the X-ray. X-ray status should switch to "CALIBRATE."
+3. Calibration typically completes in **5 minutes**.
 4. Do not operate the X-ray shutter or begin experiments until calibration is confirmed complete.
-
-> **TODO:** Add screenshot of Excillum calibration screen and exact menu navigation steps.
 
 ---
 
@@ -50,7 +46,7 @@ controller. The source self-calibrates once triggered.
 Sample calibration uses alumina powder calibrants to determine the beam center position on the
 detector and the accurate sample-to-detector distance. This information is used by PyFAI during
 azimuthal integration to convert 2D diffraction patterns into 1D intensity profiles. Without
-accurate calibration, all downstream `q` or `2θ` values will be incorrect.
+accurate calibration, all downstream `q` or `2θ` values will be incorrect, not to mention peaks might be wider or altogether non-existent.
 
 The calibration workflow in the automated data pipeline performs:
 - Correction for detector tilt
@@ -58,6 +54,9 @@ The calibration workflow in the automated data pipeline performs:
 - Sample-to-detector distance calibration
 
 ### Calibrant Materials and Positions
+
+**Old system**
+The following is a description of the older system used for calibration. 
 
 Alumina (Al₂O₃) calibrant pucks are placed at four cardinal positions on the sample holder.
 Their coordinates in the instrument coordinate system are:
@@ -73,16 +72,17 @@ Their coordinates in the instrument coordinate system are:
 > Joseph's office). See [Sample Handling](sample_handling.md) for the full coordinate system
 > description.
 
+This system was dropped due to the difficulty of producing sample holders and calibrants that would reliably show alumina rings. The North-South-West-East system was originally developed to interpolate sample-to-detector distance at any point in the sample. This ended up being difficult due to the lack of sample flatness in most samples, as well as the difficulty in linearly interpolating poni1 and poni2 values, which describe detector tilt away from perpendicular to the X-ray beam. Any results from this era are calibrated using just the North calibrant ([6,31]). 
+
+**Current System**
+Currently, we use a single scan of Alumina per dataset. This is due to limitations in our automation, both robotic and computational. However, we are currently (March 25, 2026) in the process of developing new procedures. This is a work in progress. 
+
 ### Procedure
 
-1. Confirm calibrant pucks are seated correctly at all four cardinal positions on the sample holder.
-2. Run calibration scans on all four calibrant positions using the controller API.
-3. The automated Dagster pipeline will pick up the resulting `.h5` files and run the PyFAI
-   calibration workflow automatically. See [Dagster](software/dagster.md) for details.
-4. Verify the output calibration parameters (beam center, detector distance, tilt) are
-   reasonable before proceeding to sample data collection.
-
-> **TODO:** Add example calibration script and expected output parameter ranges.
+PYFAI Explanation: 
+See: Software page. 
+T
+> **TODO:** Add expected output parameter ranges, citation of Gannon's MAXIMA-ViT work.
 
 ### Manual Calibration with PyFAI
 
@@ -108,7 +108,6 @@ Re-run sample calibration when any of the following occur:
   [Troubleshooting](../troubleshooting.md))
 
 ---
-
 ## Changelog
 
 | Version | Date | Author | Notes |
