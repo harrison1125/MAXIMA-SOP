@@ -1,0 +1,98 @@
+site_name: MAXIMA SOP
+site_description: Standard Operating Procedure for the MAXIMA Multimodal Automated X-ray Investigation of Materials instrument at AIMD-L, Johns Hopkins University
+site_author: Harrison Park
+repo_url: https://github.com/YOUR_ORG/maxima-sop   # TODO: update with actual repo URL
+repo_name: maxima-sop
+edit_uri: edit/main/docs/
+
+# Build settings
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs           # Top-level sections as tabs
+    - navigation.sections       # Expand sections in sidebar
+    - navigation.expand         # Auto-expand active section
+    - navigation.top            # "Back to top" button
+    - search.highlight          # Highlight search terms in results
+    - search.suggest            # Search autocomplete
+    - content.code.copy         # Copy button on code blocks
+    - content.action.edit       # "Edit this page" link (uses repo_url + edit_uri)
+    - toc.integrate             # Table of contents integrated into left sidebar
+
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - git-revision-date-localized:   # Shows last-edited date on each page
+      enable_creation_date: true
+      type: date
+
+markdown_extensions:
+  - admonition                  # Enables > [!NOTE], > [!WARNING] style callout boxes
+  - pymdownx.details            # Collapsible admonition blocks
+  - pymdownx.superfences:       # Fenced code blocks with syntax highlighting
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite       # Inline code syntax highlighting
+  - pymdownx.tabbed:            # Tabbed content blocks
+      alternate_style: true
+  - tables                      # Markdown table support
+  - toc:
+      permalink: true           # Adds anchor link icon to each heading
+
+nav:
+  - Home: index.md
+  - Safety: safety.md
+  - Procedures:
+      - Startup: startup.md
+      - Calibration: calibration.md
+      - Sample Handling: sample_handling.md
+      - Shutdown: shutdown.md             # TODO: create shutdown.md
+      - Running an Experiment: experiment.md  # TODO: create experiment.md
+  - Software:
+      - Docker: software/docker.md
+      - Git Bash: software/gitbash.md
+      - Dagster: software/dagster.md
+      - PyFAI: software/pyfai.md
+      - PyMCA: software/pymca.md
+      - Dectris Albula: software/albula.md   # TODO: create albula.md
+      - OpenMSIStream: software/openmsistream.md  # TODO: create openmsistream.md
+  - Troubleshooting: troubleshooting.md
+  - Reference:
+      - Coordinate System: reference/coordinates.md  # TODO: create
+      - Detector Specifications: reference/detector.md  # TODO: create
+      - X-ray Source: reference/source.md  # TODO: create
+      - Changelog: changelog.md  # TODO: create
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/YOUR_ORG/maxima-sop  # TODO: update
+
+# Required pip packages for building this site:
+# pip install mkdocs mkdocs-material mkdocs-git-revision-date-localized-plugin
