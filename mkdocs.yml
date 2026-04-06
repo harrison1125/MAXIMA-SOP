@@ -69,7 +69,7 @@ nav:
   - Home: index.md
   - Safety: safety.md
   - Procedures:
-      - Startup: startup.md
+      - Startup: manual_startup.md
       - Calibration: calibration.md
       - Sample Handling: sample_handling.md
       - Shutdown: shutdown.md             # TODO: create shutdown.md

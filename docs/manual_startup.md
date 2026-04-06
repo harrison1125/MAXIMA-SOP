@@ -9,6 +9,8 @@
 
 ## Overview
 
+While MAXIMA is meant to be an automated device run through AIMD-L's run manager, there are instances in which this is infeasible. The run manager can go down, or there are simply checks that are easier to run manually. Accessing the MAXIMA controller manually through GitBash enables us to run MAXIMA this way. 
+
 Starting MAXIMA requires launching the instrument control software stack in the correct order.
 The control system runs inside a Docker container (`aimdrc`) on the MAXIMA control PC. Git Bash
 is used to interface with that container from Windows.
@@ -23,9 +25,8 @@ For detailed explanations of each tool (Docker, Git Bash, the container commands
 Before launching any software, confirm the following physical conditions:
 
 - [ ] Second person present (buddy system — see [Safety](safety.md))
-- [ ] Dosimeter on and active
 - [ ] Auto-door is **closed**
-- [ ] Warning light state is as expected (green = standby)
+- [ ] Warning light state is as expected (all off for now, X-ray ready) 
 - [ ] Machine calibration is scheduled if this is first startup of the day (see [Calibration](calibration.md))
 
 ---
@@ -122,6 +123,9 @@ If this completes without errors, the system is ready.
 
 - If this is the first startup of the day, proceed to **[Machine Calibration](calibration.md#machine-calibration)** before running any experiments.
 - To run an experiment, see **[Running an Experiment](../experiment.md)**.
+
+
+Run scripts in MAXIMA are slightly different in running it manually vs. running it through the run manager. Refer to documentation on run scripts to ensure you are using the correct version. 
 
 ---
 
