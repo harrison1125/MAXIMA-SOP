@@ -633,6 +633,96 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DOE
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DOE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../doe/rayna_htmax.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMAX – Ti-V (Rayna)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -757,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../software/dagster/" class="md-nav__link">
+      <a href="../software/dagster.md" class="md-nav__link">
         
   
   
@@ -1002,6 +1092,56 @@
     <span class="md-ellipsis">
       
         Timestamp shifts after power cycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-translation-repeatedly-triggers-e-stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linear translation repeatedly triggers E-stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robot-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robot Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Robot Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e3820-robot-has-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E3820 · Robot has part
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e3802-robot-pickup-timed-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E3802 · Robot pickup timed out
       
     </span>
   </a>
@@ -1372,6 +1512,39 @@ resets on restart.</p>
 <p><strong>Resolution:</strong> This is a known issue without a root-cause fix. Account for the timestamp
 offset during data post-processing. Note the time of the restart to use as a reference.</p>
 <hr />
+<h3 id="linear-translation-repeatedly-triggers-e-stop">Linear translation repeatedly triggers E-stop<a class="headerlink" href="#linear-translation-repeatedly-triggers-e-stop" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> Any X-coordinate command causes the linear stage to hit the E-stop endlessly,
+regardless of the value entered.</p>
+<p><strong>Likely cause:</strong> The home position of the linear stage appears to reset after a system
+reboot, causing the stage to report out-of-bounds positions for all commanded coordinates.</p>
+<p><strong>Resolution:</strong> The issue appears to self-resolve within a short time after reboot (on the
+order of seconds to a minute). If it persists, contact Proto support.</p>
+<blockquote>
+<p><strong>Note:</strong> Root cause is not fully understood. If you observe this after a reboot and it
+does <em>not</em> resolve on its own, document the exact sequence and report it to Harrison Park.</p>
+</blockquote>
+<hr />
+<h2 id="robot-issues">Robot Issues<a class="headerlink" href="#robot-issues" title="Permanent link">&para;</a></h2>
+<h3 id="e3820-robot-has-part">E3820 · Robot has part<a class="headerlink" href="#e3820-robot-has-part" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> <code>E3820 • Error • Robot has part</code> is raised by MAXIMA: Internal robot.</p>
+<p><strong>Likely cause:</strong> The robot's internal boolean tracking whether the UR3e is holding a sample
+was not cleared when the run was interrupted. The arm may have already released the sample
+physically, but the software state was not updated.</p>
+<p><strong>Resolution:</strong>
+1. Clear the sample from the holder.
+2. Cancel the interrupted run.
+3. Restart the run — this is generally sufficient to reset the boolean state.</p>
+<hr />
+<h3 id="e3802-robot-pickup-timed-out">E3802 · Robot pickup timed out<a class="headerlink" href="#e3802-robot-pickup-timed-out" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> <code>E3802 • Error • Robot pickup timed out</code> is raised by MAXIMA: Internal robot.</p>
+<p><strong>Likely cause:</strong> High likelihood of a tilted sample stuck in the auto-door sample holder.
+The bottom-of-holder sensor that detects sample insertion may not be triggering.</p>
+<p><strong>Resolution:</strong>
+1. Open the auto-door using Xcollect.
+2. Re-seat and straighten the sample in the holder.
+3. Close the auto-door.
+4. Wait — the run should resume automatically once the sensor detects the sample.</p>
+<hr />
 <h2 id="xrf-issues">XRF Issues<a class="headerlink" href="#xrf-issues" title="Permanent link">&para;</a></h2>
 <h3 id="xrf-files-not-saving-all-intensities-are-zero">XRF files not saving / all intensities are zero<a class="headerlink" href="#xrf-files-not-saving-all-intensities-are-zero" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> XRF <code>.mca</code> files are created but contain all zero counts, or files are not
@@ -1441,7 +1614,7 @@ since the last calibration run.</p>
    - PyFAI calibration failure (re-run calibration)
    - Container not running (check Docker Desktop)
 4. Use <strong>Re-execute from failure</strong> in the UI to retry without re-running successful steps.</p>
-<p>See <a href="../software/dagster/">Dagster</a> for more detail on monitoring and re-runs.</p>
+<p>See <a href="software/dagster.md">Dagster</a> for more detail on monitoring and re-runs.</p>
 <hr />
 <h2 id="escalation-path">Escalation Path<a class="headerlink" href="#escalation-path" title="Permanent link">&para;</a></h2>
 <table>
@@ -1493,6 +1666,12 @@ since the last calibration run.</p>
 <td>Harrison Park</td>
 <td>Initial draft</td>
 </tr>
+<tr>
+<td>1.1</td>
+<td>May 2026</td>
+<td>Harrison Park</td>
+<td>Added Robot Issues section (E3820, E3802); added linear translation E-stop and Ivanti/Windows App connection stubs to Hardware and Software Issues</td>
+</tr>
 </tbody>
 </table>
 
@@ -1517,7 +1696,7 @@ since the last calibration run.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 25, 2026 19:25:44 UTC">March 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 28, 2026 13:39:01 UTC">May 28, 2026</span>
   </span>
 
     
