@@ -74,6 +74,8 @@ nav:
       - Sample Handling: sample_handling.md
       - Shutdown: shutdown.md             # TODO: create shutdown.md
       - Running an Experiment: experiment.md  # TODO: create experiment.md
+          - DOE:                                    
+            - HTMAX – Ti-V (Rayna): doe/rayna_htmax.md 
   - Software:
       - Docker: software/docker.md
       - Git Bash: software/gitbash.md
