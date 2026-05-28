@@ -15,7 +15,8 @@ MAXIMA requires two distinct types of calibration before data collection:
 2. **Sample calibration** — establishes the sample-to-detector geometry using known calibrant
    materials placed on the sample holder. At this point in time is done through PyFAI GUI. Gannon Murray's current (March 25, 2026) work is on establishing MAXIMA-ViT, an automated sample-to-detector distance calibration.
 
-Both are required when starting fresh for the day. X-ray calibration is forced at the start of each day, while sample calibration is currently (March 25, 2026) manually controlled. There is no system stopping you from running experiments without calibration. However, sample calibration is, from this date forward (March 25, 2026) required whenever it has been 24 hours since the last calibration, and also when the sample holder or detector are repositioned. 
+Both are required when starting fresh for the day. X-ray calibration is forced at the start of each day, while sample calibration is currently (March 25, 2026) manually controlled. There is no system stopping you from running experiments without calibration. However, sample calibration is, from this date forward (March 25, 2026) required whenever it has been 24 hours since the last calibration, and also when the sample holder or detector are repositioned.
+ 
 ---
 
 ## Machine Calibration
