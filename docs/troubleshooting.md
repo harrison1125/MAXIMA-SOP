@@ -47,6 +47,54 @@ offset during data post-processing. Note the time of the restart to use as a ref
 
 ---
 
+### Linear translation repeatedly triggers E-stop
+
+**Symptom:** Any X-coordinate command causes the linear stage to hit the E-stop endlessly,
+regardless of the value entered.
+
+**Likely cause:** The home position of the linear stage appears to reset after a system
+reboot, causing the stage to report out-of-bounds positions for all commanded coordinates.
+
+**Resolution:** The issue appears to self-resolve within a short time after reboot (on the
+order of seconds to a minute). If it persists, contact Proto support.
+
+> **Note:** Root cause is not fully understood. If you observe this after a reboot and it
+> does *not* resolve on its own, document the exact sequence and report it to Harrison Park.
+
+---
+
+## Robot Issues
+
+### E3820 · Robot has part
+
+**Symptom:** `E3820 • Error • Robot has part` is raised by MAXIMA: Internal robot.
+
+**Likely cause:** The robot's internal boolean tracking whether the UR3e is holding a sample
+was not cleared when the run was interrupted. The arm may have already released the sample
+physically, but the software state was not updated.
+
+**Resolution:**
+1. Clear the sample from the holder.
+2. Cancel the interrupted run.
+3. Restart the run — this is generally sufficient to reset the boolean state.
+
+---
+
+### E3802 · Robot pickup timed out
+
+**Symptom:** `E3802 • Error • Robot pickup timed out` is raised by MAXIMA: Internal robot.
+
+**Likely cause:** High likelihood of a tilted sample stuck in the auto-door sample holder.
+The bottom-of-holder sensor that detects sample insertion may not be triggering.
+
+**Resolution:**
+1. Open the auto-door using Xcollect.
+2. Re-seat and straighten the sample in the holder.
+3. Close the auto-door.
+4. Wait — the run should resume automatically once the sensor detects the sample.
+
+---
+
 ## XRF Issues
 
 ### XRF files not saving / all intensities are zero
@@ -163,5 +211,6 @@ See [Dagster](software/dagster.md) for more detail on monitoring and re-runs.
 ## Changelog
 
 | Version | Date | Author | Notes |
-|---------|------|--------|-------|
-| 1.0 | March 2025 | Harrison Park | Initial draft |
+|---------|------------|---------------|-----------------------------------------------------------------------|
+| 1.0     | March 2025 | Harrison Park | Initial draft                                                         |
+| 1.1     | May 2026   | Harrison Park | Added Robot Issues section (E3820, E3802); added linear translation E-stop and Ivanti/Windows App connection stubs to Hardware and Software Issues |
